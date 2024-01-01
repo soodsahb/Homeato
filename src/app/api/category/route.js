@@ -1,6 +1,24 @@
-import { isAdmin } from "../auth/[...nextauth]/route";
 import { Category } from "../models/Category";
 import mongoose from "mongoose";
+import NextAuth, { getServerSession } from "next-auth";
+import { UserInfo } from "../models/UserInfo";
+import { authOptions } from "../auth/[...nextauth]/route";
+
+export async function isAdmin() {
+  const session = await getServerSession(authOptions);
+  const userEmail = await session?.user?.email;
+
+  if (!userEmail) {
+    return false;
+  }
+
+  const userInfo = await UserInfo.findOne({ email: userEmail });
+  if (!userInfo) {
+    return false;
+  }
+
+  return userInfo.admin;
+}
 export async function POST(req) {
   const { name } = await req.json();
 

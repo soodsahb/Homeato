@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Item } from "../models/MenuItem";
-import { isAdmin } from "../auth/[...nextauth]/route";
+import { isAdmin } from "../category/route";
 
 export async function POST(req) {
   const data = await req.json();

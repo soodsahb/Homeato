@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "../models/User";
-import { isAdmin } from "../auth/[...nextauth]/route";
+import { isAdmin } from "../category/route";
 
 export async function GET() {
   await mongoose.connect(process.env.MONGO_URL);
