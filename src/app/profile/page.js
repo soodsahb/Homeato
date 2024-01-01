@@ -45,7 +45,7 @@ const Page = () => {
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/profile", {
         method: "PUT",
-        headers: { "Content-type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
       if (response.ok) resolve();
