@@ -130,7 +130,7 @@ const Header = () => {
         </div>
       </div>
 
-      {handleHamToggle && status === "authenticated" && (
+      {handleHamToggle && (
         <div className="md:hidden p-4 bg-gray-200 rounded-lg mt-2 ">
           <div className="flex flex-col justify-cente items-center gap-2">
             {status === "authenticated" && (
