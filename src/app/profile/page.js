@@ -41,6 +41,7 @@ const Page = () => {
     ev.preventDefault();
     console.log(data);
     // setIsSaving(true);
+    data.admin = data.admin ? data.admin : false;
 
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/profile", {

@@ -76,7 +76,7 @@ const UserForm = ({ user, onSave }) => {
   //         .catch((error) => console.error("Error fetching user data:", error));
   //     }, [])
   //   : {};
-  console.log(user);
+
   return (
     <div className="md:flex gap-4 ">
       <div className=" rounded-full p-2 relative">
