@@ -25,47 +25,58 @@ const UserForm = ({ user, onSave }) => {
   const { data } = useCheckAdmin();
   const { id } = useParams;
 
-  path === "/profile"
-    ? useEffect(() => {
-        // Fetch user data from the database (replace with your actual API endpoint)
-        fetch("/api/profile") // Update the API endpoint as needed
-          .then((res) => res.json())
-          .then((userData) => {
-            // Update state variables with user data
-            setImage(userData?.image || "");
-            setUsername(userData?.userName || "");
-            setPhone(userData?.phone || "");
-            setAddress(userData?.address || "");
-            setPincode(userData?.pincode || "");
-            setCountry(userData?.country || "");
-            setCity(userData?.city || "");
-            setEmail(userData?.email || "");
-            setAdmin(userData?.admin || "");
-          })
-          .catch((error) => console.error("Error fetching user data:", error));
-      }, [])
-    : {};
+  useEffect(() => {
+    setImage(user?.image || "");
+    setUsername(user?.userName || "");
+    setPhone(user?.phone || "");
+    setAddress(user?.address || "");
+    setPincode(user?.pincode || "");
+    setCountry(user?.country || "");
+    setCity(user?.city || "");
+    setEmail(user?.email || "");
+    setAdmin(user?.admin || "");
+  }, [user]);
+  // path === "/profile"
+  //   ? useEffect(() => {
+  //       // Fetch user data from the database (replace with your actual API endpoint)
+  //       fetch("/api/profile") // Update the API endpoint as needed
+  //         .then((res) => res.json())
+  //         .then((userData) => {
+  //           // Update state variables with user data
+  //           setImage(userData?.image || "");
+  //           setUsername(userData?.userName || "");
+  //           setPhone(userData?.phone || "");
+  //           setAddress(userData?.address || "");
+  //           setPincode(userData?.pincode || "");
+  //           setCountry(userData?.country || "");
+  //           setCity(userData?.city || "");
+  //           setEmail(userData?.email || "");
+  //           setAdmin(userData?.admin || "");
+  //         })
+  //         .catch((error) => console.error("Error fetching user data:", error));
+  //     }, [])
+  //   : {};
 
-  path.includes("/users")
-    ? useEffect(() => {
-        // Fetch user data from the database (replace with your actual API endpoint)
-        fetch("/api/profile_id=" + id)
-          .then((res) => res.json())
-          .then((userData) => {
-            // Update state variables with user data
-            setImage(userData?.image || "");
-            setUsername(userData?.userName || "");
-            setPhone(userData?.phone || "");
-            setAddress(userData?.address || "");
-            setPincode(userData?.pincode || "");
-            setCountry(userData?.country || "");
-            setCity(userData?.city || "");
-            setEmail(userData?.email || "");
-          })
-          .catch((error) => console.error("Error fetching user data:", error));
-      }, [])
-    : {};
-
+  // path.includes("/users")
+  //   ? useEffect(() => {
+  //       // Fetch user data from the database (replace with your actual API endpoint)
+  //       fetch("/api/profile_id=" + id)
+  //         .then((res) => res.json())
+  //         .then((userData) => {
+  //           // Update state variables with user data
+  //           setImage(userData?.image || "");
+  //           setUsername(userData?.userName || "");
+  //           setPhone(userData?.phone || "");
+  //           setAddress(userData?.address || "");
+  //           setPincode(userData?.pincode || "");
+  //           setCountry(userData?.country || "");
+  //           setCity(userData?.city || "");
+  //           setEmail(userData?.email || "");
+  //         })
+  //         .catch((error) => console.error("Error fetching user data:", error));
+  //     }, [])
+  //   : {};
+  console.log(user);
   return (
     <div className="md:flex gap-4 ">
       <div className=" rounded-full p-2 relative">
