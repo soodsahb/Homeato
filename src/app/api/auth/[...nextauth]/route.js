@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 
 import mongoose from "mongoose";
 import NextAuth, { getServerSession } from "next-auth";
