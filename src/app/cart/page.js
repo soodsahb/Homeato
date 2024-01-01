@@ -18,16 +18,6 @@ const CartPage = () => {
   const [user, setUser] = useState(null);
   const isLoading = status === "loading";
 
-  if (isLoading && status === "unauthenticated") {
-    return "...loading";
-  }
-
-  // Redirect if the user is unauthenticated or still loading session status
-  if (!isLoading && status === "unauthenticated") {
-    // Redirect to the login page
-    window.location.replace("/login");
-    return null; // Return null to prevent rendering the Cart content
-  }
   const { cartProducts, cartProductPrice, removeCartProduct } =
     useContext(CartContext);
 
@@ -108,6 +98,10 @@ const CartPage = () => {
         </Link>
       </div>
     );
+  }
+
+  if (status === "unauthenticated") {
+    return <>Please login</>;
   }
   return (
     <section className="mt-8">
