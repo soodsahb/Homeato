@@ -13,7 +13,7 @@ import { UserInfo } from "../../models/UserInfo";
 
 export const authOptions = {
   secret: process.env.SECRET,
-  // adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise),
 
   providers: [
     GoogleProvider({
