@@ -5,9 +5,9 @@ import { User } from "../models/User";
 import { UserInfo } from "../models/UserInfo";
 
 export async function PUT(req) {
-  mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect(process.env.MONGO_URL);
   const data = await req.json();
-  console.log(data);
+
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
 
