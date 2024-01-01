@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import mongoose from "mongoose";
 import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
