@@ -123,7 +123,7 @@ const UserForm = ({ user, onSave }) => {
               className=""
               value={"1"}
               checked={admin}
-              onClick={(ev) => setAdmin(ev.target.checked)}
+              onChange={(ev) => setAdmin(ev.target.checked)}
             />
             <span>Admin</span>
           </label>

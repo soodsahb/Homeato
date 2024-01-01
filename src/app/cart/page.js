@@ -111,6 +111,7 @@ const CartPage = () => {
           {cartProducts.length > 0 &&
             cartProducts.map((product, index) => (
               <CartProduct
+                key={index}
                 product={product}
                 cartProductPrice={cartProductPrice}
                 removeCartProduct={removeCartProduct}

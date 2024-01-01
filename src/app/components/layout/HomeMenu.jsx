@@ -38,6 +38,7 @@ const HomeMenu = () => {
             image={item.image}
             sizes={item.sizes}
             extraingredients={item.extraingredients}
+            key={item._id}
           ></MenuItem>
         ))}
       </div>

@@ -14,6 +14,7 @@ const MenuItemTile = ({ onAddToCart, ...item }) => {
           height={100}
           width={189}
           className="block mx-auto"
+          alt="image"
         ></Image>
       </div>
 

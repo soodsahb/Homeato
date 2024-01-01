@@ -16,7 +16,6 @@ const MenuItem = (menuitem) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   async function addToCartButtonClick() {
-    console.log(menuitem);
     const hasoptions = sizes.length > 0 || extraingredients.length > 0;
     if (hasoptions && !popup) {
       setPopup(true);
@@ -95,11 +94,14 @@ const MenuItem = (menuitem) => {
                     Pick Your Size
                   </h3>
                   {sizes.map((size) => (
-                    <label className="flex gap-1 items-center p-2 border rounded-md mb-2">
+                    <label
+                      key={size._id}
+                      className="flex gap-1 items-center p-2 border rounded-md mb-2"
+                    >
                       <input
                         type="radio"
                         name="size"
-                        onClick={() => setSelectedSize(size)}
+                        onChange={() => setSelectedSize(size)}
                         checked={selectedSize?.name === size.name}
                       />{" "}
                       {size.name} ₹{basePrice + size.price}
@@ -113,11 +115,17 @@ const MenuItem = (menuitem) => {
                     Pick Extra-Ingredients
                   </h3>
                   {extraingredients.map((ingredient) => (
-                    <label className="flex gap-1 items-center p-2 border rounded-md mb-2">
+                    <label
+                      key={ingredient._id}
+                      className="flex gap-1 items-center p-2 border rounded-md mb-2"
+                    >
                       <input
                         type="checkbox"
                         name={ingredient.name}
-                        onClick={(ev) => handleAddExtras(ev, ingredient)}
+                        checked={selectedIngredients
+                          .map((e) => e._id)
+                          .includes(ingredient._id)}
+                        onChange={(ev) => handleAddExtras(ev, ingredient)}
                       />{" "}
                       {ingredient.name} +₹{ingredient.price}
                     </label>

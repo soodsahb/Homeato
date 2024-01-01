@@ -76,9 +76,9 @@ const OrderPage = () => {
           style={{ width: "800px" }}
         >
           <div style={{ width: "350px" }}>
-            {order.cartProducts.map((product) => (
+            {order.cartProducts.map((product, index) => (
               <CartProduct
-                key={product._id}
+                key={index}
                 product={product}
                 cartProductPrice={cartProductPrice}
               ></CartProduct>

@@ -11,7 +11,7 @@ const CartProduct = ({
   return (
     <div className="flex items-center gap-4  border-b py-4">
       <div className="w-24">
-        <Image src={product.image} width={240} height={240}></Image>
+        <Image src={product.image} width={240} height={240} alt="image"></Image>
       </div>
       <div className="grow">
         <h3 className="font-semibold">{product.itemName}</h3>

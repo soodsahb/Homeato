@@ -18,7 +18,7 @@ const AddressInputs = ({
         disabled={disabled}
         type="tel"
         placeholder="Phone number"
-        value={phone}
+        value={phone || ""}
         onChange={(ev) => setPhone(ev.target.value)}
       />
       <div className="grid grid-cols-2 gap-2">
@@ -28,7 +28,7 @@ const AddressInputs = ({
           <input
             type="text"
             placeholder="Pin code"
-            value={pincode}
+            value={pincode || ""}
             disabled={disabled}
             onChange={(ev) => setPincode(ev.target.value)}
           />
@@ -38,7 +38,7 @@ const AddressInputs = ({
           <input
             type="text"
             placeholder="City"
-            value={city}
+            value={city || ""}
             disabled={disabled}
             onChange={(ev) => setCity(ev.target.value)}
           />
@@ -48,7 +48,7 @@ const AddressInputs = ({
       <input
         type="text"
         placeholder="Country"
-        value={country}
+        value={country || ""}
         disabled={disabled}
         onChange={(ev) => setCountry(ev.target.value)}
       />

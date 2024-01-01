@@ -27,7 +27,10 @@ const Users = () => {
       <div className="mt-8">
         {users.length > 0 &&
           users.map((user) => (
-            <div className="bg-gray-100 rounded-lg p-4 mb-2 flex justify-between items-center">
+            <div
+              key={user._id}
+              className="bg-gray-100 rounded-lg p-4 mb-2 flex justify-between items-center"
+            >
               <div className="grid grid-cols-2 gap-4 grow md:grid-cols-3">
                 <div>
                   {user.userName && <span>{user.userName}</span>}

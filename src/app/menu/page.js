@@ -26,7 +26,7 @@ const MenuPage = () => {
   return (
     <section className=" mt-8">
       {categories.map((c) => (
-        <div>
+        <div key={c._id}>
           <div>
             <SectionHeaders mainHeader={c.name}></SectionHeaders>
           </div>
@@ -34,7 +34,7 @@ const MenuPage = () => {
           <div className="grid sm:grid-cols-3 gap-4 mt-6 mb-12">
             {menuitems
               .filter((item) => item.category === c.name)
-              .map((item) => (
+              .map((item, index) => (
                 <MenuItem
                   itemName={item.itemName}
                   basePrice={item.basePrice}
@@ -42,6 +42,7 @@ const MenuPage = () => {
                   image={item.image}
                   sizes={item.sizes}
                   extraingredients={item.extraingredients}
+                  key={item._id}
                 ></MenuItem>
               ))}
           </div>

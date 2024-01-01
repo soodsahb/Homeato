@@ -65,7 +65,6 @@ export default function MenuItemForm({
   function removeIngredients(index) {
     setextraingredients((prev) => prev.filter((v, i) => i !== index));
   }
-  console.log(category);
 
   const [arrowclicked, setArrowClicked] = useState(false);
   const [iarrowclicked, setiArrowClicked] = useState(false);

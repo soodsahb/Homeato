@@ -44,6 +44,7 @@ const MenuItemsPage = () => {
           menuItems.map((item) => {
             return (
               <Link
+                key={item._id}
                 href={"/menu-items/edit/" + item._id}
                 className="bg-gray-200 rounded-lg p-4"
               >
@@ -53,6 +54,7 @@ const MenuItemsPage = () => {
                     src={item.image}
                     width={200}
                     height={200}
+                    alt="image"
                   />
                 </div>
                 <div className="text-center">{item.itemName}</div>
