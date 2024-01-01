@@ -15,7 +15,7 @@ import { useCheckAdmin } from "../components/CheckAdmin";
 
 import UserForm from "../components/layout/UserForm";
 
-const page = () => {
+const Page = () => {
   const session = useSession();
   const status = session.status;
   const userData = session.data?.user;
@@ -79,4 +79,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
