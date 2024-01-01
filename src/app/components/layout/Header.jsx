@@ -108,12 +108,12 @@ const Header = () => {
   }
   return (
     <header className="">
-      {status === "authenticated" && (
-        <div className="flex md:hidden justify-between items-center">
-          <Link className="text-primary font-semibold text-2xl" href={"/"}>
-            HOMEATO
-          </Link>
-          <div className="flex gap-6 items-center">
+      <div className="flex md:hidden justify-between items-center">
+        <Link className="text-primary font-semibold text-2xl" href={"/"}>
+          HOMEATO
+        </Link>
+        <div className="flex gap-6 items-center">
+          {status === "authenticated" && (
             <Link href="/cart" className="relative flex items-center">
               <FaShoppingCart className="text-2xl" />
               {cartProducts.length > 0 && (
@@ -122,13 +122,15 @@ const Header = () => {
                 </span>
               )}
             </Link>
-            <button onClick={handleMenu}>
-              <GiHamburgerMenu />
-            </button>
-          </div>
+          )}
+
+          <button onClick={handleMenu}>
+            <GiHamburgerMenu />
+          </button>
         </div>
-      )}
-      {handleHamToggle && (
+      </div>
+
+      {handleHamToggle && status === "authenticated" && (
         <div className="md:hidden p-4 bg-gray-200 rounded-lg mt-2 ">
           <div className="flex flex-col justify-cente items-center gap-2">
             {status === "authenticated" && (
