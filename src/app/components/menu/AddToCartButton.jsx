@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import FlyingButton from "react-flying-item";
+import { useSession } from "next-auth/react";
 
 const AddToCartButton = ({
   onAddToCart,
@@ -7,6 +9,8 @@ const AddToCartButton = ({
   basePrice,
   image,
 }) => {
+  const { status } = useSession();
+
   if (!hassizesorextras) {
     return (
       <div className="flying-button-container ">
@@ -14,11 +18,17 @@ const AddToCartButton = ({
           src={image}
           targetTop={"5%"}
           targetLeft={"95%"}
-          flyingItemStyling={{ width: "20rem" }} // Add this line
+          flyingItemStyling={{ width: "20rem" }}
         >
           <span
             className="text-sm font-bold flex  p-1.5 gap-2  whitespace-nowrap"
-            onClick={() => onAddToCart()}
+            onClick={() => {
+              if (status === "authenticated") {
+                onAddToCart();
+              } else {
+                window.location.replace("/login");
+              }
+            }}
           >
             ADD TO CART<span className="text-md font-bold">₹{basePrice}</span>
           </span>
@@ -30,7 +40,13 @@ const AddToCartButton = ({
     <button
       className="bg-primary rounded-full  px-5 py-3 text-white mt-2 mx-auto flex items-center  gap-2  overflow-hidden"
       style={{ width: "95%" }}
-      onClick={() => onAddToCart()}
+      onClick={() => {
+        if (status === "authenticated") {
+          onAddToCart();
+        } else {
+          window.location.replace("/login");
+        }
+      }}
     >
       {" "}
       <span className="text-sm font-bold flex gap-2 p-1.5  whitespace-nowrap">
