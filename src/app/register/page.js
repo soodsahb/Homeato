@@ -8,6 +8,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useRef } from "react";
 import { MdError } from "react-icons/md";
 import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 const Registerpage = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,38 @@ const Registerpage = () => {
   const [userCreated, setUserCreated] = useState(false);
   const [err, setErr] = useState(false);
   const [userName, setUserName] = useState("");
+  const [strength, setStrength] = useState("");
+
+  const checkPasswordStrength = () => {
+    const lengthRegex = /^.{8,}$/;
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const numberRegex = /[0-9]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    const isLengthValid = lengthRegex.test(password);
+    const isUppercaseValid = uppercaseRegex.test(password);
+    const isLowercaseValid = lowercaseRegex.test(password);
+    const isNumberValid = numberRegex.test(password);
+    const isSpecialCharValid = specialCharRegex.test(password);
+
+    const strengthCount =
+      (isLengthValid ? 1 : 0) +
+      (isUppercaseValid ? 1 : 0) +
+      (isLowercaseValid ? 1 : 0) +
+      (isNumberValid ? 1 : 0) +
+      (isSpecialCharValid ? 1 : 0);
+
+    if (strengthCount === 5) {
+      setStrength("Strong");
+    } else if (strengthCount >= 3) {
+      setStrength("Moderate");
+    } else if (strengthCount >= 1) {
+      setStrength("Weak");
+    } else {
+      setStrength("Very Weak");
+    }
+  };
 
   const handleSignInWithGoogle = async () => {
     await signIn("google", { callbackUrl: "/" });
@@ -29,27 +62,33 @@ const Registerpage = () => {
     setErr(false);
     setUserCreated(false);
 
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        body: JSON.stringify({ email, password, userName }),
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log(userName);
+    if (strength === "Strong") {
+      try {
+        const response = await fetch("/api/register", {
+          method: "POST",
+          body: JSON.stringify({ email, password, userName }),
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(userName);
 
-      if (response.ok) {
-        setUserCreated(true);
-      } else {
+        if (response.ok) {
+          setUserCreated(true);
+        } else {
+          setErr(true);
+          console.error(`Registration failed with status: ${response.status}`);
+        }
+      } catch (error) {
         setErr(true);
-        console.error(`Registration failed with status: ${response.status}`);
+        console.error("Error during registration:", error);
       }
-    } catch (error) {
-      setErr(true);
-      console.error("Error during registration:", error);
-    }
 
-    setCreatingUser(false);
+      setCreatingUser(false);
+    } else {
+      toast.error("Choose a stronger password");
+      setCreatingUser(false);
+    }
   }
+
   return (
     <section>
       <h1 className="text-center text-primary text-4xl  mt-8 mb-4">Register</h1>
@@ -86,12 +125,18 @@ const Registerpage = () => {
           type="password"
           placeholder="Enter your password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            checkPasswordStrength();
+          }}
           disabled={creatingUser}
         />
+
         <button type="submit" disabled={creatingUser}>
           Register
         </button>
+        {password.length > 0 && <p>Password Strength: {strength}</p>}
+
         <div className="my-4 text-center text-gray-500">
           Or Login With Provider
         </div>
