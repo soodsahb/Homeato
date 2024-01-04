@@ -13,7 +13,7 @@ import { UserInfo } from "../../models/UserInfo";
 
 export const authOptions = {
   secret: process.env.SECRET,
-  // adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise),
 
   providers: [
     GoogleProvider({
@@ -59,6 +59,10 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
 };
 
 const handler = NextAuth(authOptions);
