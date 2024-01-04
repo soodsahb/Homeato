@@ -15,7 +15,7 @@ const AddToCartButton = ({
     return (
       <div className="flying-button-container ">
         <FlyingButton
-          src={image}
+          src={status === "authenticated" ? image : undefined}
           targetTop={"5%"}
           targetLeft={"95%"}
           flyingItemStyling={{ width: "20rem" }}
