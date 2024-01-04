@@ -84,88 +84,91 @@ const CartPage = () => {
       error: "Sorry Error occured",
     });
   }
-
-  if (cartProducts.length === 0) {
-    return (
-      <div className="flex items-center flex-col mt-16 justify-center">
-        Your Cart is Empty😔
-        <Link
-          href={"/menu"}
-          style={{ color: "#fff", borderRadius: "9999px" }}
-          className="button mt-8 max-w-md bg-primary text-white "
-        >
-          Add Some {"      "}🛒
-        </Link>
-      </div>
-    );
-  }
-
   if (status === "unauthenticated") {
-    return <>Please login</>;
+    window.location.replace("/login");
   }
-  return (
-    <section className="mt-8">
-      <SectionHeaders mainHeader={"Cart"}></SectionHeaders>
-      <div className="grid md:grid-cols-2 gap-8 mt-8">
-        <div>
-          {cartProducts.length > 0 &&
-            cartProducts.map((product, index) => (
-              <CartProduct
-                key={index}
-                product={product}
-                cartProductPrice={cartProductPrice}
-                removeCartProduct={removeCartProduct}
-                index={index}
-              ></CartProduct>
-            ))}
-          {total > 0 && (
-            <div className=" justify-end pr-16 py-2 flex items-center">
-              <div className="text-gray-500">
-                Subtotal:
-                <br />
-                Delivery:
-                <br />
-                Total:
+  if (status === "authenticated") {
+    if (cartProducts.length === 0) {
+      return (
+        <div className="flex items-center flex-col mt-16 justify-center">
+          Your Cart is Empty😔
+          <Link
+            href={"/menu"}
+            style={{ color: "#fff", borderRadius: "9999px" }}
+            className="button mt-8 max-w-md bg-primary text-white "
+          >
+            Add Some {"      "}🛒
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  if (status === "authenticated") {
+    return (
+      <section className="mt-8">
+        <SectionHeaders mainHeader={"Cart"}></SectionHeaders>
+        <div className="grid md:grid-cols-2 gap-8 mt-8">
+          <div>
+            {cartProducts.length > 0 &&
+              cartProducts.map((product, index) => (
+                <CartProduct
+                  key={index}
+                  product={product}
+                  cartProductPrice={cartProductPrice}
+                  removeCartProduct={removeCartProduct}
+                  index={index}
+                ></CartProduct>
+              ))}
+            {total > 0 && (
+              <div className=" justify-end pr-16 py-2 flex items-center">
+                <div className="text-gray-500">
+                  Subtotal:
+                  <br />
+                  Delivery:
+                  <br />
+                  Total:
+                </div>
+                <div className="font-semibold pl-2 text-right">
+                  ₹{total}
+                  <br />
+                  ₹40
+                  <br />₹{total > 0 ? total + 40 : 0}
+                </div>
               </div>
-              <div className="font-semibold pl-2 text-right">
-                ₹{total}
-                <br />
-                ₹40
-                <br />₹{total > 0 ? total + 40 : 0}
-              </div>
+            )}
+          </div>
+          {cartProducts.length > 0 && (
+            <div className="bg-gray-100 p-4 rounded-lg max-h-[400px]">
+              <h2>Checkout</h2>
+              <form onSubmit={proceedToCheckOut}>
+                <label>Address</label>
+                <input
+                  type="text"
+                  placeholder="Street Address"
+                  value={address}
+                  onChange={(ev) => setAddress(ev.target.value)}
+                />
+                <AddressInputs
+                  phone={phone}
+                  setPhone={setPhone}
+                  pincode={pincode}
+                  setPincode={setPincode}
+                  city={city}
+                  setCity={setCity}
+                  country={country}
+                  setCountry={setCountry}
+                ></AddressInputs>
+                <button type="submit" className="">
+                  Pay ₹{total > 0 ? total + 40 : 0}
+                </button>
+              </form>
             </div>
           )}
         </div>
-        {cartProducts.length > 0 && (
-          <div className="bg-gray-100 p-4 rounded-lg max-h-[400px]">
-            <h2>Checkout</h2>
-            <form onSubmit={proceedToCheckOut}>
-              <label>Address</label>
-              <input
-                type="text"
-                placeholder="Street Address"
-                value={address}
-                onChange={(ev) => setAddress(ev.target.value)}
-              />
-              <AddressInputs
-                phone={phone}
-                setPhone={setPhone}
-                pincode={pincode}
-                setPincode={setPincode}
-                city={city}
-                setCity={setCity}
-                country={country}
-                setCountry={setCountry}
-              ></AddressInputs>
-              <button type="submit" className="">
-                Pay ₹{total > 0 ? total + 40 : 0}
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
 };
 
 export default CartPage;
