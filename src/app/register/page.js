@@ -135,7 +135,16 @@ const Registerpage = () => {
         <button type="submit" disabled={creatingUser}>
           Register
         </button>
-        {password.length > 0 && <p>Password Strength: {strength}</p>}
+        {password.length > 0 && (
+          <p className="mt-1">
+            Password Strength: {strength}
+            <br />
+            <span className="text-xs text-gray-500">
+              (Must include one Uppercase,one lowercase,one number and one
+              special character)
+            </span>
+          </p>
+        )}
 
         <div className="my-4 text-center text-gray-500">
           Or Login With Provider
